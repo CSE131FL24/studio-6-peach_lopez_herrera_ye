@@ -12,11 +12,18 @@ public class RecursiveMethods {
 	 *         ...)
 	 */
 	public static double geometricSum(int n) {
-		
+
 			// FIXME compute the geometric sum for the first n terms recursively
+		if(n==0) {
 			return 0;
-		
+		}
+		else {
+			return geometricSum(n-1)+(Math.pow(0.5,n));	
+		}
 	}
+	//geometricSum(2)+(1/8)
+	//geometricSum(1)+(1/4)
+	//geometricSum(0)+(1/2)
 	
 	/**
 	 * @param xCenter                       x-coordinate of the center of the circle
@@ -29,9 +36,20 @@ public class RecursiveMethods {
 	 */
 	public static void circlesUponCircles(double xCenter, double yCenter, double radius,
 			double radiusMinimumDrawingThreshold) {
-		
+		if(radius < radiusMinimumDrawingThreshold) {
+			return;
+		}
+		else{
+			StdDraw.circle(xCenter,yCenter,radius);
+
+			circlesUponCircles(xCenter + radius,yCenter,radius/3,radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter - radius,yCenter,radius/3,radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter,yCenter + radius,radius/3,radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter,yCenter - radius,radius/3,radiusMinimumDrawingThreshold);
+			radius = radius/3;
+			}
 		// FIXME
-	}
+}
 
 	/**
 	 * This method uses recursion to create a reverse of the given array
